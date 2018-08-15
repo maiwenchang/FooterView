@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff"
+    android:gravity="center"
+    android:paddingBottom="20sp"
+    android:paddingTop="20sp">
+
+    <View
+        android:layout_width="30dp"
+        android:layout_height="1dp"
+        android:background="#b3b3b3" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10sp"
+        android:layout_marginRight="10sp"
+        android:text="我是有底线的"
+        android:textColor="#b3b3b3"
+        android:textSize="13sp" />
+
+    <View
+        android:layout_width="30dp"
+        android:layout_height="1dp"
+        android:background="#b3b3b3" />
+</LinearLayout>
