@@ -23,11 +23,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <me.mai.undergroundview.UndergroundView
+            <org.salient.autofooter.FooterView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content">
+
+                <include layout="@layout/layout_footer"/>
+
+            </org.salient.autofooter.FooterView>
+
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
-
 </android.support.constraint.ConstraintLayout>
