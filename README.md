@@ -1,9 +1,36 @@
 # FooterView
  实现FooterView的一种新思路，当距离屏幕顶部不超过一屏高度会自动消失。
  
-``` java
+ ### Usage
+ 放在RecyclerView下方即可：
+ ``` xml
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-public class FooterView extends FrameLayout {
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <org.salient.autofooter.FooterView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/layout_footer"/>
+
+    </org.salient.autofooter.FooterView>
+
+</LinearLayout>
+ ```
+ 
+ > Note: `FooterView`继承于`FramLayout`，本身不带视图，可以向上面的例子一样，在xml布局中加入视图，或者调用`FooterView.addView(View child)`添加视图，需要注意的是，`FooterView`只能添加一个直属子View
+ 
+ 
+ ``` java
+ 
+ public class FooterView extends FrameLayout {
 
     public FooterView(@NonNull Context context) {
         super(context);
@@ -56,5 +83,4 @@ public class FooterView extends FrameLayout {
     }
 
 }
-
 ```
