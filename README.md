@@ -91,3 +91,63 @@
 
 }
 ```
+### 简单讲一下实现思路
+要实现`RecyclerView`不满一屏不显示`FooterView`，关键在于如何知道`RecyclerView`不满一屏，当然`RecyclerView`上边还有`ActionBar`，`Toolbar`，状态栏等等，如果仅仅去比较`RecyclerView`的高度和屏幕高度，显然不可行。因此，产品经理心里想要的效果应当是应当是`RecyclerView`和状态栏等加起来铺不满一屏的时候，FooterView就不显示。
+
+如果用传统的方式，需要把FooterView作为`RecyclerView`的一个Item去处理，并且把状态栏等高度考虑进去，以决定FooterView的是否显示内容。
+
+###### 这里尝试用一种新的方式去实现，就是让FooterView放在`RecyclerView`的下面，根据自己的位置自行决定要不要显示。实现步骤：
+
+ - 1.新建一个类`FooterView.class`,让它继承自`FramLayout`。
+``` java
+public class FooterView extends FrameLayout {
+
+   public FooterView(@NonNull Context context) {
+       super(context);
+   }
+
+   public FooterView(@NonNull Context context, @Nullable AttributeSet attrs) {
+       super(context, attrs);
+   }
+
+   public FooterView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+       super(context, attrs, defStyleAttr);
+   }
+}
+
+```
+
+ - 2.重写`onLayout()`方法，在FooterView添加到布局或者布局发生变动时判断是否显示内容。
+``` java
+   @Override
+   protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+       super.onLayout(changed, left, top, right, bottom);
+       View child = getChildAt(0);
+       if (child != null) {
+           int heightPixels = getContext().getResources().getDisplayMetrics().heightPixels;
+           int rawY = heightPixels - getRawTop(getParent());
+           if (rawY > 0 && top > rawY) {//FooterView的顶部距离屏幕顶部超过一屏高度
+               getChildAt(0).setVisibility(VISIBLE);
+           } else {
+               getChildAt(0).setVisibility(GONE);
+           }
+       }
+   }
+```
+- 3.利用递归获取与屏幕顶部的距离。
+``` java
+   //获取与屏幕顶部的距离
+   private int getRawTop(ViewParent parent) {
+       if (parent == null || ((ViewGroup) parent).getId() == Window.ID_ANDROID_CONTENT) {
+           if (parent != null) {
+               int[] position = new int[2];
+               ((ViewGroup) parent).getLocationOnScreen(position);
+               return position[1];
+           }
+           return 0;
+       } else {
+           return ((ViewGroup) parent).getTop() + getRawTop(parent.getParent());
+       }
+   }
+```
+
