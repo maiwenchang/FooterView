@@ -1,4 +1,7 @@
 # FooterView
+
+> 简书: [https://github.com/maiwenchang/FooterView](https://github.com/maiwenchang/FooterView)
+
  实现FooterView的一种新思路，当FooterView距离屏幕顶部不超过一屏高度会自动消失。
  
  - ![image](https://github.com/maiwenchang/FooterView/raw/master/art/Screenshot.png)
