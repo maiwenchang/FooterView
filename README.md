@@ -27,7 +27,9 @@
 </LinearLayout>
  ```
  
- > Note: `FooterView`继承于`FramLayout`，本身不带视图，可以向上面的例子一样，在xml布局中加入视图，或者调用`FooterView.addView(View child)`添加视图，需要注意的是，`FooterView`只能添加一个直属子View
+ > Note: `FooterView`继承于`FramLayout`，本身不带视图，可以向上面的例子一样，在xml布局中加入视图，或者调用`FooterView.addView(View child)`添加视图，需要注意的是，`FooterView`只能添加一个直属子View。
+ 
+ Feel free to copy:
  
  
  ``` java
